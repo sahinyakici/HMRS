@@ -14,7 +14,7 @@ public class Title {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int Id;
-    @Column(name = "title")
-    private String Title;
+    private int id;
+    @Column(name = "title_name")
+    private String titleName;
 }
