@@ -1,5 +1,6 @@
 package kodlamaio.HMRS.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +13,7 @@ import java.sql.Date;
 @Table(name = "e_mail_auths")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true, value = {"hibernateLazyInitializer", "handler", "candidate"})
 public class EMailAuth {
     @Id
     @Column(name = "id")
@@ -21,4 +23,6 @@ public class EMailAuth {
     private boolean isVerified;
     @Column(name = "verified_date")
     private Date verifiedDate;
+    @OneToOne(mappedBy = "eMailAuth")
+    private Candidate candidate;
 }

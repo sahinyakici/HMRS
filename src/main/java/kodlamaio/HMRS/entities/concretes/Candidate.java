@@ -31,8 +31,10 @@ public class Candidate {
     private String password;
     @Column(name = "re_password")
     private String rePassword;
-    @Column(name = "mernis_auth", unique = true)
-    private int mernisAuth;
-    @Column(name = "e_mail_auth", unique = true)
-    private int eMailAuth;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mernis_auth", referencedColumnName = "id")
+    private MernisAuth mernisAuth;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "e_mail_auth", referencedColumnName = "id")
+    private EMailAuth eMailAuth;
 }

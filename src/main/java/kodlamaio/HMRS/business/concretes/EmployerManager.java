@@ -5,9 +5,11 @@ import kodlamaio.HMRS.core.utilities.results.*;
 import kodlamaio.HMRS.dataAccess.abstracts.EmailAuthDao;
 import kodlamaio.HMRS.dataAccess.abstracts.EmployerDao;
 import kodlamaio.HMRS.dataAccess.abstracts.HmrsAuthDao;
+import kodlamaio.HMRS.dataAccess.abstracts.HmrsEmployeeDao;
 import kodlamaio.HMRS.entities.concretes.EMailAuth;
 import kodlamaio.HMRS.entities.concretes.Employer;
 import kodlamaio.HMRS.entities.concretes.HmrsAuth;
+import kodlamaio.HMRS.entities.concretes.HmrsEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +22,14 @@ public class EmployerManager implements EmployerService {
     private EmployerDao employerDao;
     private EmailAuthDao emailAuthDao;
     private HmrsAuthDao hmrsAuthDao;
+    private HmrsEmployeeDao hmrsEmployeeDao;
 
     @Autowired
-    public EmployerManager(EmployerDao employerDao, EmailAuthDao emailAuthDao, HmrsAuthDao hmrsAuthDao) {
+    public EmployerManager(EmployerDao employerDao, EmailAuthDao emailAuthDao, HmrsAuthDao hmrsAuthDao, HmrsEmployeeDao hmrsEmployeeDao) {
         this.employerDao = employerDao;
         this.emailAuthDao = emailAuthDao;
         this.hmrsAuthDao = hmrsAuthDao;
+        this.hmrsEmployeeDao = hmrsEmployeeDao;
     }
 
     @Override
@@ -54,9 +58,9 @@ public class EmployerManager implements EmployerService {
     }
 
     void createEmailAuth(Employer employer, Date date) {
-        EMailAuth newEMailAuth = new EMailAuth(0, true, date);
+        EMailAuth newEMailAuth = new EMailAuth(0, true, date, null);
         emailAuthDao.save(newEMailAuth);
-        employer.setEMailAuth(newEMailAuth.getId());
+        employer.setEMailAuth(newEMailAuth);
     }
 
     Result isPasswordsMatch(String password, String rePassword) {
@@ -66,9 +70,13 @@ public class EmployerManager implements EmployerService {
     }
 
     void createHmrsAuth(Employer employer, Date date) {
-        HmrsAuth hmrsAuth = new HmrsAuth(0, date, 1, true);
+        HmrsAuth hmrsAuth = new HmrsAuth(0, date, true, null, getEmployee());
         this.hmrsAuthDao.save(hmrsAuth);
-        employer.setHrmsAuth(hmrsAuth.getId());
+        employer.setHmrsAuth(hmrsAuth);
+    }
+
+    HmrsEmployee getEmployee() {
+        return this.hmrsEmployeeDao.findById(1);
     }
 
     Result isEmailAlreadyRegistered(String email) {

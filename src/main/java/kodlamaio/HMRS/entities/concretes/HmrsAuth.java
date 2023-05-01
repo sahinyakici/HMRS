@@ -1,5 +1,6 @@
 package kodlamaio.HMRS.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +13,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "hmrs_auths")
+@JsonIgnoreProperties(ignoreUnknown = true, value = {"hibernateLazyInitializer", "handler", "employer","hmrsEmployee"})
 public class HmrsAuth {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +21,11 @@ public class HmrsAuth {
     private int id;
     @Column(name = "verified_date")
     private Date verified_date;
-    @Column(name = "verified_employee")
-    private int verifiedEmployee;
     @Column(name = "is_verified")
     private boolean isVerified;
+    @OneToOne(mappedBy = "hmrsAuth")
+    private Employer employer;
+    @ManyToOne()
+    @JoinColumn(name = "verified_employee")
+    private HmrsEmployee hmrsEmployee;
 }

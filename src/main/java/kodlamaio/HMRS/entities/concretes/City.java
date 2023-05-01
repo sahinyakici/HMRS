@@ -8,19 +8,19 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-@Table(name = "titles")
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "cities")
 @JsonIgnoreProperties(ignoreUnknown = true, value = {"hibernateLazyInitializer", "handler", "jobAdvertisementList"})
-public class Title {
+public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "title_name")
-    private String titleName;
-    @OneToMany(mappedBy = "title")
+    @Column(name = "city_name")
+    private String cityName;
+    @OneToMany(mappedBy = "city")
     private List<JobAdvertisement> jobAdvertisementList;
 }

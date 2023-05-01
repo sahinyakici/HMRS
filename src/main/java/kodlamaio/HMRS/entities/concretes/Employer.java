@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="employers")
+@Table(name = "employers")
 public class Employer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +27,10 @@ public class Employer {
     private String password;
     @Column(name = "re_password")
     private String rePassword;
-    @Column(name = "e_mail_auth")
-    private int eMailAuth;
-    @Column(name = "hmrs_auth")
-    private int hrmsAuth;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "e_mail_auth", referencedColumnName = "id")
+    private EMailAuth eMailAuth;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hmrs_auth", referencedColumnName = "id")
+    private HmrsAuth hmrsAuth;
 }
