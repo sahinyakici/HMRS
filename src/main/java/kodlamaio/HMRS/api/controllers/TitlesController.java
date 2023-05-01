@@ -1,6 +1,7 @@
 package kodlamaio.HMRS.api.controllers;
 
 import kodlamaio.HMRS.business.abstracts.TitleService;
+import kodlamaio.HMRS.core.utilities.results.DataResult;
 import kodlamaio.HMRS.entities.concretes.Title;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class TitlesController {
     }
 
     @GetMapping("/getAll")
-    public List<Title> getAll() {
+    public DataResult<List<Title>> getAll() {
         return titleService.getAll();
     }
 }

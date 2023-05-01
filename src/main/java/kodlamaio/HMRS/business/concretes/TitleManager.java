@@ -1,6 +1,8 @@
 package kodlamaio.HMRS.business.concretes;
 
 import kodlamaio.HMRS.business.abstracts.TitleService;
+import kodlamaio.HMRS.core.utilities.results.DataResult;
+import kodlamaio.HMRS.core.utilities.results.SuccessDataResult;
 import kodlamaio.HMRS.dataAccess.abstracts.TitleDao;
 import kodlamaio.HMRS.entities.concretes.Title;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ public class TitleManager implements TitleService {
     }
 
     @Override
-    public List<Title> getAll() {
-        return this.titleDao.findAll();
+    public DataResult<List<Title>> getAll() {
+        return new SuccessDataResult<List<Title>>(titleDao.findAll(), "Data listed");
     }
 }
