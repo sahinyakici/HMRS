@@ -14,4 +14,10 @@ public interface JobAdvertisementService {
     DataResult<List<JobAdvertisement>> findByIsOpenOrderByApplicationDeadlineAsc(boolean isOpen);
 
     Result addJobAdvertisement(JobAdvertisement jobAdvertisement);
+
+    DataResult<List<JobAdvertisement>> findByEmployerCompanyNameAndIsOpen(String employerCompanyName, boolean isOpen);
+
+    DataResult<JobAdvertisement> findById(int id);
+
+    DataResult<JobAdvertisement> setJobAdvertisementStatus(int id, boolean newStatus);
 }

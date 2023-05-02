@@ -38,4 +38,14 @@ public class JobAdvertisementController {
     public DataResult<List<JobAdvertisement>> findByIsOpenOrderByApplicationDeadlineAsc() {
         return this.jobAdvertisement.findByIsOpenOrderByApplicationDeadlineAsc(true);
     }
+
+    @GetMapping("/getAllWithCompanyName")
+    public DataResult<List<JobAdvertisement>> findByEmployerCompanyName(@RequestParam String employerName, @RequestParam Boolean isOpen) {
+        return this.jobAdvertisement.findByEmployerCompanyNameAndIsOpen(employerName, isOpen);
+    }
+
+    @PatchMapping("/updateWithId")
+    DataResult<JobAdvertisement> setJobAdvertisementStatus(@RequestParam int id, @RequestParam boolean newStatus) {
+        return this.jobAdvertisement.setJobAdvertisementStatus(id, newStatus);
+    }
 }

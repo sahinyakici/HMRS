@@ -41,4 +41,22 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         this.jobAdvertisementDao.save(jobAdvertisement);
         return new SuccessResult();
     }
+
+    @Override
+    public DataResult<List<JobAdvertisement>> findByEmployerCompanyNameAndIsOpen(String employerName, boolean isOpen) {
+        return new SuccessDataResult<>(this.jobAdvertisementDao.findByEmployerCompanyNameAndIsOpen(employerName, isOpen));
+    }
+
+    @Override
+    public DataResult<JobAdvertisement> findById(int id) {
+        return new SuccessDataResult<>(this.jobAdvertisementDao.findById(id));
+    }
+
+    @Override
+    public DataResult<JobAdvertisement> setJobAdvertisementStatus(int id, boolean newStatus) {
+        JobAdvertisement advertisement = findById(id).getData();
+        advertisement.setOpen(newStatus);
+        return new SuccessDataResult<>(this.jobAdvertisementDao.save(advertisement));
+    }
+
 }

@@ -1,5 +1,7 @@
 package kodlamaio.HMRS.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,4 +38,8 @@ public class JobAdvertisement {
     private boolean isOpen;
     @Column(name = "job_desc")
     private String jobDesc;
+    @ManyToOne()
+    @JsonBackReference
+    @JoinColumn(name = "employer")
+    private Employer employer;
 }

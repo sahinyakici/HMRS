@@ -1,9 +1,13 @@
 package kodlamaio.HMRS.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -33,4 +37,7 @@ public class Employer {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "hmrs_auth", referencedColumnName = "id")
     private HmrsAuth hmrsAuth;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "employer")
+    private List<JobAdvertisement> jobAdvertisements;
 }

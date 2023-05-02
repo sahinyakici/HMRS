@@ -34,6 +34,7 @@ public class HmrsEmployeeManager implements HmrsEmployeeService {
 
     @Override
     public Result saveHmrsEmployee(HmrsEmployee employee) {
+        employee.setHmrsAuthList(null);
         this.hmrsEmployeeDao.save(employee);
         return new SuccessResult("Employee saved successfully");
     }
