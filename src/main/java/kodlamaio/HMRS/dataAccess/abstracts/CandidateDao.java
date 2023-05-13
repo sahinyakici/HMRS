@@ -9,4 +9,6 @@ public interface CandidateDao extends JpaRepository<Candidate, Integer> {
     List<Candidate> findByeMailIgnoreCase(String email);
 
     List<Candidate> findByNationalId(String nationalId);
+
+    Candidate findById(int id);
 }

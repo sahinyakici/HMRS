@@ -8,5 +8,8 @@ import java.util.List;
 
 public interface CandidateService {
     DataResult<List<Candidate>> getAll();
+
     Result addCandidate(Candidate candidate);
+
+    DataResult<Candidate> findById(int id);
 }

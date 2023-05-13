@@ -1,7 +1,8 @@
 package kodlamaio.HMRS.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class JobAdvertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @JsonIgnore
     private int id;
     @ManyToOne()
     @JoinColumn(name = "title")
@@ -41,5 +43,6 @@ public class JobAdvertisement {
     @ManyToOne()
     @JsonBackReference
     @JoinColumn(name = "employer")
+    @Schema(hidden = true)
     private Employer employer;
 }

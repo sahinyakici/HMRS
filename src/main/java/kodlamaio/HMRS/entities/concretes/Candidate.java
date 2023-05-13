@@ -1,5 +1,6 @@
 package kodlamaio.HMRS.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,8 +34,10 @@ public class Candidate {
     private String rePassword;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "mernis_auth", referencedColumnName = "id")
+    @JsonIgnore
     private MernisAuth mernisAuth;
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     @JoinColumn(name = "e_mail_auth", referencedColumnName = "id")
     private EMailAuth eMailAuth;
 }

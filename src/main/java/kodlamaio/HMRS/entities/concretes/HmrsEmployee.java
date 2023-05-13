@@ -1,6 +1,6 @@
 package kodlamaio.HMRS.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +23,7 @@ public class HmrsEmployee {
     @Column(name = "surname")
     private String surname;
     @OneToMany(mappedBy = "hmrsEmployee")
+    @Schema(hidden = true)
     private List<HmrsAuth> hmrsAuthList;
 
 }

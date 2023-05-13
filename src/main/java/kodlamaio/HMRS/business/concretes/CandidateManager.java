@@ -60,6 +60,11 @@ public class CandidateManager implements CandidateService {
 
     }
 
+    @Override
+    public DataResult<Candidate> findById(int id) {
+        return new SuccessDataResult<>(this.candidateDao.findById(id));
+    }
+
     Result isEmailAlreadyRegistered(String eMail) {
         List<Candidate> result = candidateDao.findByeMailIgnoreCase(eMail);
         if (result.size() != 0) {
@@ -98,13 +103,13 @@ public class CandidateManager implements CandidateService {
     }
 
     void createEmailAuth(Candidate candidate, Date date) {
-        EMailAuth newEMailAuth = new EMailAuth(0, true, date,null);
+        EMailAuth newEMailAuth = new EMailAuth(0, true, date, null);
         emailAuthDao.save(newEMailAuth);
         candidate.setEMailAuth(newEMailAuth);
     }
 
     void createMernisAuth(Candidate candidate, Date date) {
-        MernisAuth newMernisAuth = new MernisAuth(0, true, date,null);
+        MernisAuth newMernisAuth = new MernisAuth(0, true, date, null);
         mernisAuthDao.save(newMernisAuth);
         candidate.setMernisAuth(newMernisAuth);
     }
